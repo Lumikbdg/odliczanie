@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Odliczanie do rzeźni na plaży</title>
+
+  <style>
+
+    body {
+
+      background: #111;
+
+      color: #0f0;
+
+      font-family: monospace;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      height: 100vh;
+
+      flex-direction: column;
+
+    }
+
+    h1 {
+
+      margin-bottom: 20px;
+
+    }
+
+    #timer {
+
+      font-size: 3em;
+
+      background-color: #222;
+
+      padding: 20px;
+
+      border-radius: 10px;
+
+      box-shadow: 0 0 10px #0f0;
+
+    }
+
+
+
+    /* Ukryj iframe żeby nie było widać okienka YouTube */
+
+    iframe {
+
+      width: 0;
+
+      height: 0;
+
+      border: 0;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Odliczanie do 26 lipca 2025, 02:00</h1>
+
+  <div id="timer">Ładowanie zegara...</div>
+
+
+
+  <!-- 🔊 Ukryty odtwarzacz YouTube -->
+
+  <button onclick="startMusic()"▶️ Odtwórz Wakacyjna nutka</button>
+
+
+
+<iframe
+
+  id="ytplayer"
+
+  style="display: none;"
+
+  src=""
+
+  allow="autoplay"
+
+  allowfullscreen
+
+></iframe>
+
+
+
+<script>
+
+  function startMusic() {
+
+    const iframe = document.getElementById("ytplayer");
+
+    iframe.style.display = "none"; // nie musisz go pokazywać
+
+    iframe.src = "https://www.youtube.com/watch?v=qjHlgrGsLWQ&list=RDqjHlgrGsLWQ&start_radio=1";
+
+  }
+
+</script>
+
+
+
+  <script>
+
+    const endTime = new Date("2025-07-26T02:00:00").getTime();
+
+
+
+    function updateTimer() {
+
+      const now = new Date().getTime();
+
+      const distance = endTime - now;
+
+
+
+      if (distance <= 0) {
+
+        document.getElementById("timer").innerHTML = "🔥 CZAS NASTAŁ 🔥";
+
+        return;
+
+      }
+
+
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+
+      document.getElementById("timer").innerHTML =
+
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+    }
+
+
+
+    setInterval(updateTimer, 1000);
+
+    updateTimer();
+
+  </script>
+
+</body>
+
+</html>
